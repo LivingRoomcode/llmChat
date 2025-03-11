@@ -12,6 +12,47 @@ import { CozeAPI, ChatEventType, RoleType } from '@coze/api';
 import { token, baseURL, bot_id } from '../config/initConfig';
 import './ChatDialog.scss';
 
+import { registerMicroApps, start } from 'qiankun';
+
+
+// 定义微应用信息
+const microApps = [
+    {
+        name: 'micro-app-1',
+        entry: '//localhost:8081',
+        container: '#micro-app-container',
+        activeRule: '/micro-app-1',
+    },
+    // 可以添加更多微应用
+];
+
+// 注册微应用
+registerMicroApps(microApps, {
+    beforeLoad: (app) => {
+        console.log('before load', app);
+        return Promise.resolve();
+    },
+    beforeMount: (app) => {
+        console.log('before mount', app);
+        return Promise.resolve();
+    },
+    afterMount: (app) => {
+        console.log('after mount', app);
+        return Promise.resolve();
+    },
+    beforeUnmount: (app) => {
+        console.log('before unmount', app);
+        return Promise.resolve();
+    },
+    afterUnmount: (app) => {
+        console.log('after unmount', app);
+        return Promise.resolve();
+    },
+});
+
+// 启动 qiankun
+start();
+
 const { TextArea } = Input;
 
 const ChatDialog = () => {
@@ -305,7 +346,7 @@ const ChatDialog = () => {
                             accept="image/*"
                             multiple
                             beforeUpload={() => false}
-                            onChange={(e) => handleImageUpload(e, setIsLoading, setImageUrls)}
+                            onChange={(e:any) => handleImageUpload(e, setIsLoading, setImageUrls)}
                         >
                             <Button icon={<PictureOutlined />} className="upload-button">
                                 📷 上传图片

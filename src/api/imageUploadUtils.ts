@@ -21,7 +21,7 @@ const handleImageUpload = async (
             const branch = 'main';
             const path = `images/${file.name}`;
 
-            const reader = new FileReader();
+            const reader:any = new FileReader();
             //将图片内容编码为 Base64 字符串的格式
             reader.readAsDataURL(file);
 
@@ -52,7 +52,7 @@ const handleImageUpload = async (
                                 const errorData = await getResponse.json();
                                 throw new Error(errorData.message || '获取文件信息失败');
                             }
-                        } catch (error) {
+                        } catch (error:any) {
                             reject(new Error('检查文件时出错: ' + error.message));
                             return;
                         }
@@ -97,7 +97,7 @@ const handleImageUpload = async (
 
         setImageUrls(prev => [...prev, ...uploadedUrls]);
         console.log('所有上传图片的 URL:', uploadedUrls);
-    } catch (error) {
+    } catch (error:any) {
         alert('上传失败: ' + error.message);
     } finally {
         setIsLoading(false);
